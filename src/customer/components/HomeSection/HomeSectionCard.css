@@ -1,0 +1,18 @@
+@media only screen and (max-width: 720px) {
+    .home-section-card{
+        height: max-content;
+        width: 15vh;
+        margin: 0px;
+        box-shadow: 0.5px 0.6px 0.5px 0.5px #dbd7d7;
+    }
+    .home-section-card h3{
+        font-size: 9pt;
+    }
+    .home-section-card p{
+        font-size: 6pt;
+    }
+    .section-img{
+        height: 7rem;
+        width: 5rem;
+    }
+  }
