@@ -1,9 +1,11 @@
-
 import { useState } from "react";
 import { RadioGroup } from "@headlessui/react";
-import Rating from '@mui/material/Rating';
-import { color } from './../Product/FilterData';
-import { Button } from "@mui/material";
+import Rating from "@mui/material/Rating";
+import LinearProgress from "@mui/material/LinearProgress";
+import { Button, Grid, Box } from "@mui/material";
+import ProductReviewCard from "./ProductReviewCard";
+import { mens_kurta } from './../../../Data/men_kurta';
+import HomeSectionCard from './../HomeSection/HomeSectionCard';
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -37,7 +39,6 @@ const product = {
     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
   ],
   sizes: [
-
     { name: "S", inStock: true },
     { name: "M", inStock: true },
     { name: "L", inStock: true },
@@ -117,7 +118,7 @@ export default function ProductDetails() {
               />
             </div>
             <div className=" flex flex-wrap space-x-5 justify-center">
-            {product.images.map((item) => (
+              {product.images.map((item) => (
                 <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem]">
                   <img
                     src={item.src}
@@ -126,40 +127,44 @@ export default function ProductDetails() {
                   />
                 </div>
               ))}
-              </div>
+            </div>
           </div>
           {/* Product info */}
-          <div className="lg: col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8
-          lg:pb-24">
+          <div
+            className="lg: col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8
+          lg:pb-24"
+          >
             <div className="lg:col-span-2 ">
               <h1 className="text-lg font-semibold lg:text-xl text-gray-900">
-              Hand cut and sewn locally              </h1>
-             <h1 className="text-lg  lg:text-xl text-gray-900 opacity-60 pt-1">The Basic Tee 6-Pack allows you to fully 
-              express your vibrant personality with three grayscale options </h1>
+                Hand cut and sewn locally{" "}
+              </h1>
+              <h1 className="text-lg  lg:text-xl text-gray-900 opacity-60 pt-1">
+                The Basic Tee 6-Pack allows you to fully express your vibrant
+                personality with three grayscale options{" "}
+              </h1>
             </div>
 
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <div className="flex space-x-5 items-center text-lg lg:text-xl mt-6 text-gray-900">
-                <p className=" font-semibold">
-                  ₹199
-                </p>
-                <p className=" opacity-50 line-through">
-                  ₹211 
-                </p>
-                <p className=" text-green-600">
-                  5% Off
-                </p>
-                
+                <p className=" font-semibold">₹199</p>
+                <p className=" opacity-50 line-through">₹211</p>
+                <p className=" text-green-600">5% Off</p>
               </div>
 
               {/* Reviews */}
-              <div className="mt-6"><div className=" flex items-center space-x-3">
-              <Rating name="read-only" value={3.5} readOnly />
-              <p className=" opacity-50 text-sm">45453 Ratings</p>
-              <p className=" ml-3 opacity-50 text-sm font-medium
-               text-indigo-600 hover:text-indigo-500">54154 reviews</p></div>
+              <div className="mt-6">
+                <div className=" flex items-center space-x-3">
+                  <Rating name="read-only" value={3.5} readOnly />
+                  <p className=" opacity-50 text-sm">45453 Ratings</p>
+                  <p
+                    className=" ml-3 opacity-50 text-sm font-medium
+               text-indigo-600 hover:text-indigo-500"
+                  >
+                    54154 reviews
+                  </p>
+                </div>
               </div>
 
               <form className="mt-10">
@@ -286,8 +291,10 @@ export default function ProductDetails() {
                   </RadioGroup>
                 </div>
 
-                <Button color="secondary" variant="contained"
-                sx={{px:"2rem",py:"1rem",bgcolor:"#9155fd"}}
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  sx={{ px: "2rem", py: "1rem", bgcolor: "#9155fd" }}
                 >
                   Add to Cart
                 </Button>
@@ -331,7 +338,134 @@ export default function ProductDetails() {
               </div>
             </div>
           </div>
+        </section>
 
+        {/* rating and reviews */}
+        <section>
+          <h1 className=" font-semibold text-lg pb-4">
+            Recent review and ratings
+          </h1>
+          <div className=" border p-5">
+            <Grid container spacing={7}>
+              <Grid item xs={7}>
+                <div className="space-y-5">
+                  {[1, 1, 1, 1].map((items) => (
+                    <ProductReviewCard />
+                  ))}
+                </div>
+              </Grid>
+
+              <Grid item xs={5}>
+                <h1 className=" text-xl font-semibold pb-1">Product Rating</h1>
+                <div className=" flex items-center space-x-2">
+                  <Rating value={3.6} precision={0.1} readOnly />
+                  <p className=" opacity-50">45456 Ratings</p>
+                </div>
+                <Box className=" mt-5 space-y-3">
+                  <Grid
+                    container
+                    alignItems=" center"
+                    gap={2}
+                  >
+                    <Grid item xs={2}>
+                      <p>Excellent</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={70}
+                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        color="success"
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    container
+
+                    alignItems=" center"
+                    gap={2}
+                  >
+                    <Grid item xs={2}>
+                      <p>Very Good</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={30}
+                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        color="success"
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    container
+                    alignItems=" center"
+                    gap={2}
+                  >
+                    <Grid item xs={2}>
+                      <p>Good</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={25}
+                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        color="primary"
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    container
+                    alignItems=" center"
+                    gap={2}
+                  >
+                    <Grid item xs={2}>
+                      <p>Average</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={20}
+                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        color="warning"
+                      />
+                    </Grid>
+                  </Grid>
+
+                  <Grid
+                    container
+                    alignItems=" center"
+                    gap={2}
+                  >
+                    <Grid item xs={2}>
+                      <p>Poor</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={30}
+                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        color="error"
+                      />
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
+            </Grid>
+          </div>
+        </section>
+
+        {/* Similar products */}
+        <section>
+          <h1 className=" font-bold text-xl py-5 align-middle text-center">Similar Products</h1>
+          <div className=" flex flex-wrap space-y-2 space-x-2">
+            {mens_kurta.map((items)=>
+              <HomeSectionCard product={items}/>
+            )}
+          </div>
         </section>
       </div>
     </div>
