@@ -4,8 +4,9 @@ import Rating from "@mui/material/Rating";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Button, Grid, Box } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
-import { mens_kurta } from './../../../Data/men_kurta';
-import HomeSectionCard from './../HomeSection/HomeSectionCard';
+import { mens_kurta } from "./../../../Data/men_kurta";
+import HomeSectionCard from "./../HomeSection/HomeSectionCard";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -64,6 +65,11 @@ function classNames(...classes) {
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const navigate = useNavigate();
+
+  let handleAddtoCart = () => {
+    navigate("/cart");
+  };
 
   return (
     <div className="bg-white">
@@ -292,6 +298,7 @@ export default function ProductDetails() {
                 </div>
 
                 <Button
+                  onClick={handleAddtoCart}
                   color="secondary"
                   variant="contained"
                   sx={{ px: "2rem", py: "1rem", bgcolor: "#9155fd" }}
@@ -362,11 +369,7 @@ export default function ProductDetails() {
                   <p className=" opacity-50">45456 Ratings</p>
                 </div>
                 <Box className=" mt-5 space-y-3">
-                  <Grid
-                    container
-                    alignItems=" center"
-                    gap={2}
-                  >
+                  <Grid container alignItems=" center" gap={2}>
                     <Grid item xs={2}>
                       <p>Excellent</p>
                     </Grid>
@@ -374,18 +377,13 @@ export default function ProductDetails() {
                       <LinearProgress
                         variant="determinate"
                         value={70}
-                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        sx={{ borderRadius: 4, height: 7, bgcolor: "#d0d0d0" }}
                         color="success"
                       />
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    container
-
-                    alignItems=" center"
-                    gap={2}
-                  >
+                  <Grid container alignItems=" center" gap={2}>
                     <Grid item xs={2}>
                       <p>Very Good</p>
                     </Grid>
@@ -393,17 +391,13 @@ export default function ProductDetails() {
                       <LinearProgress
                         variant="determinate"
                         value={30}
-                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        sx={{ borderRadius: 4, height: 7, bgcolor: "#d0d0d0" }}
                         color="success"
                       />
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    container
-                    alignItems=" center"
-                    gap={2}
-                  >
+                  <Grid container alignItems=" center" gap={2}>
                     <Grid item xs={2}>
                       <p>Good</p>
                     </Grid>
@@ -411,17 +405,13 @@ export default function ProductDetails() {
                       <LinearProgress
                         variant="determinate"
                         value={25}
-                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        sx={{ borderRadius: 4, height: 7, bgcolor: "#d0d0d0" }}
                         color="primary"
                       />
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    container
-                    alignItems=" center"
-                    gap={2}
-                  >
+                  <Grid container alignItems=" center" gap={2}>
                     <Grid item xs={2}>
                       <p>Average</p>
                     </Grid>
@@ -429,17 +419,13 @@ export default function ProductDetails() {
                       <LinearProgress
                         variant="determinate"
                         value={20}
-                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        sx={{ borderRadius: 4, height: 7, bgcolor: "#d0d0d0" }}
                         color="warning"
                       />
                     </Grid>
                   </Grid>
 
-                  <Grid
-                    container
-                    alignItems=" center"
-                    gap={2}
-                  >
+                  <Grid container alignItems=" center" gap={2}>
                     <Grid item xs={2}>
                       <p>Poor</p>
                     </Grid>
@@ -447,7 +433,7 @@ export default function ProductDetails() {
                       <LinearProgress
                         variant="determinate"
                         value={30}
-                        sx={{ borderRadius: 4, height: 7,bgcolor:"#d0d0d0" }}
+                        sx={{ borderRadius: 4, height: 7, bgcolor: "#d0d0d0" }}
                         color="error"
                       />
                     </Grid>
@@ -460,11 +446,13 @@ export default function ProductDetails() {
 
         {/* Similar products */}
         <section>
-          <h1 className=" font-bold text-xl py-5 align-middle text-center">Similar Products</h1>
+          <h1 className=" font-bold text-xl py-5 align-middle text-center">
+            Similar Products
+          </h1>
           <div className=" flex flex-wrap space-y-2 space-x-2">
-            {mens_kurta.map((items)=>
-              <HomeSectionCard product={items}/>
-            )}
+            {mens_kurta.map((items) => (
+              <HomeSectionCard product={items} />
+            ))}
           </div>
         </section>
       </div>

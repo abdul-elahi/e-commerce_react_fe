@@ -9,6 +9,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { blue } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 const navigation = {
   categories: [
@@ -146,6 +147,33 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openUserMenu = Boolean(anchorEl);
+
+  const handleUserClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseUserMenu = (event) => {
+    setAnchorEl(null);
+  };
+
+  const handleOpen = () => {
+    // setOpenAuthModal(true);
+  };
+  const handleClose = () => {
+    // setOpenAuthModal(false);
+  };
+
+  const handleCategoryClick = (category, section, item, close) => {
+    navigate(`/${category.id}/${section.id}/${item.id}`);
+    close();
+  };
+  const handleMyOrderClick=()=>{
+    handleCloseUserMenu()
+    navigate("/account/order")
+  }
+
 
   return (
     <div className="bg-white ">
@@ -365,7 +393,7 @@ export default function Navigation() {
                 <div className="flex h-full space-x-8">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
-                      {({ open }) => (
+                      {({ open,close }) => (
                         <>
                           <div className="relative flex">
                             <Popover.Button
@@ -450,12 +478,19 @@ export default function Navigation() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <a
-                                                  href={item.href}
-                                                  className="hover:text-gray-800"
+                                                <p
+                                                  onClick={() =>
+                                                    handleCategoryClick(
+                                                      category,
+                                                      section,
+                                                      item,
+                                                      close
+                                                    )
+                                                  }
+                                                  className="cursor-pointer hover:text-gray-800"
                                                 >
                                                   {item.name}
-                                                </a>
+                                                </p>
                                               </li>
                                             ))}
                                           </ul>
@@ -490,11 +525,11 @@ export default function Navigation() {
                     <div>
                       <Avatar
                         className="text-white"
-                        // onClick={handleUserClick}
+                        onClick={handleUserClick}
                         aria-controls={open ? "basic-menu" : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? "true" : undefined}
-                        // onClick={handleUserClick}
+                       
                         sx={{
                           bgcolor: blue[500],
                           color: "white",
@@ -505,6 +540,7 @@ export default function Navigation() {
                       </Avatar>
                       <Menu
                         id="basic-menu"
+                        open={openUserMenu}
                         MenuListProps={{
                           "aria-labelledby": "basic-button",
                         }}
@@ -513,7 +549,7 @@ export default function Navigation() {
                           Profile
                         </MenuItem>
 
-                        <MenuItem>
+                        <MenuItem onClick={()=>navigate("account/order")}>
                           My Orders
                         </MenuItem>
                         <MenuItem >Logout</MenuItem>
